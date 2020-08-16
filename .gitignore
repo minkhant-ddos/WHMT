@@ -1,1 +1,19 @@
 import hashlib
+found = False
+
+mypass_hash = input("Enter your SHA-256 Password Hash: ")
+dict_words = open("pass_list.txt", "r")
+
+for word in dict_words:
+    encrypt_word = word.encode("utf-8")
+    hash_word = hashlib.sha256(encrypt_word.strip()).hexdigest()
+
+    if hash_word == mypass_hash:
+        print("Bingo! Password Found.")
+        print("This is Password >> " + word)
+        found = True
+        break
+
+if found == False:
+    print("Password not found in the list")
+
